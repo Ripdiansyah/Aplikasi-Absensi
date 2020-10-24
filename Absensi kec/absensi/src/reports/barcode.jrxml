@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="79b29b80-12bd-4ee7-baef-982e9b9d51aa">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="29"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     pegawai.`id_pegawai` AS pegawai_id_pegawai,
+     pegawai.`nama` AS pegawai_nama
+FROM
+     `pegawai` pegawai]]>
+	</queryString>
+	<field name="pegawai_id_pegawai" class="java.lang.String"/>
+	<field name="pegawai_nama" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="58" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="131" splitType="Stretch">
+			<textField>
+				<reportElement x="228" y="31" width="74" height="20" uuid="e6877b1e-82b0-450a-b0d2-2c3708da5f81"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pegawai_nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="192" y="11" width="172" height="20" uuid="bdd6996e-395d-49d9-9c9d-a61dfc89eae2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pegawai_id_pegawai}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="179" y="65" width="200" height="50" uuid="ee83bf97-e3e1-4783-ba77-60f8f6d85c96"/>
+				<jr:Code128 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" moduleWidth="2.0" textPosition="bottom">
+					<jr:codeExpression><![CDATA[$F{pegawai_id_pegawai}]]></jr:codeExpression>
+				</jr:Code128>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aaa48384-0ccc-45b2-bce3-575cfb02dead">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     pegawai.`id_pegawai` AS pegawai_id_pegawai,
+     pegawai.`nama` AS pegawai_nama,
+     pegawai.`jabatan` AS pegawai_jabatan,
+     pegawai.`id_jam_kerja` AS pegawai_id_jam_kerja
+FROM
+     `pegawai` pegawai
+where id_jam_kerja = "TKS"]]>
+	</queryString>
+	<field name="pegawai_id_pegawai" class="java.lang.String"/>
+	<field name="pegawai_nama" class="java.lang.String"/>
+	<field name="pegawai_jabatan" class="java.lang.String"/>
+	<field name="pegawai_id_jam_kerja" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="139" y="16" width="301" height="34" uuid="29adfe9b-d39c-42b5-b286-3bd94c957af7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA PEGAWAI TENAGA KERJA SEKURELAWAN  KANTOR KEC.TALEGONG]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="14" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="38" y="1" width="129" height="20" uuid="14183fd4-1c7b-4796-8bc2-81cb70d73402"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NIK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="409" y="1" width="99" height="19" uuid="e2329379-be32-4c76-bd76-b8accd16360a"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="1" width="140" height="20" uuid="b84bae27-26f2-48e1-be4d-d1e54a041c36"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="309" y="1" width="100" height="20" uuid="012f8211-ec41-4ccf-bd8d-4f56af71f2f2"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Jabatan]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="38" y="0" width="129" height="20" uuid="9b456f96-54bd-4446-83c9-1459c1975080"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{pegawai_id_pegawai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="167" y="0" width="141" height="20" uuid="d5d565c9-b9a3-4b39-b484-3370d5e53afc"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{pegawai_nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="309" y="0" width="100" height="20" uuid="64694d31-c4cb-42c4-8260-8aa8584bc4de"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{pegawai_jabatan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="409" y="0" width="99" height="20" uuid="623e9b70-5bf0-41c7-a58c-65634bdf660e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{pegawai_id_jam_kerja}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="104" splitType="Stretch">
+			<staticText>
+				<reportElement x="309" y="84" width="157" height="20" uuid="04fad143-7057-4ffc-949e-bdaa60d581fc"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Caca Rifai, S.Pd.,M.Si]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="309" y="33" width="47" height="20" uuid="82923213-1a89-4335-a1fd-1a1c96b55b8e"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Camat,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="309" y="13" width="47" height="20" uuid="57217fa0-bfe0-4264-be8b-8c7fed512acb"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Talegong]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="368" y="13" width="187" height="20" uuid="255d0365-969a-434c-bbd1-71ffca0253f8"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="101" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="28" splitType="Stretch"/>
+	</summary>
+</jasperReport>

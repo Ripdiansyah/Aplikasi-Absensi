@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d42f0092-d046-4763-be9c-36a5e2527664">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     pegawai.`nama`,
+     pegawai.`id_pegawai`,
+     detail_absen.`jam`,
+     detail_absen.`id_absen` AS detail_absen_id_absen,
+     detail_absen.`jam` AS detail_absen_jam,
+     detail_absen.`jam_keluar` AS detail_absen_jam_keluar,
+     detail_absen.`keterangan` AS detail_absen_keterangan
+FROM
+     `pegawai` pegawai,
+     `detail_absen` detail_absen]]>
+	</queryString>
+	<field name="nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_pegawai" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jam" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="detail_absen_id_absen" class="java.lang.Integer"/>
+	<field name="detail_absen_jam" class="java.sql.Time"/>
+	<field name="detail_absen_jam_keluar" class="java.sql.Time"/>
+	<field name="detail_absen_keterangan" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="77" y="46" width="394" height="33" uuid="e708e064-82e5-45d2-9f78-bda789c30c36"/>
+				<textElement>
+					<font fontName="Times New Roman" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN ABSENSI PEGAWAI]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="21" splitType="Stretch">
+			<line>
+				<reportElement x="47" y="10" width="465" height="1" uuid="cf52fc1a-0bc4-47a4-b994-a2edefbab610"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="59" height="20" uuid="3983f95b-d400-4e1e-b4a3-35d5c52d4a47"/>
+				<text><![CDATA[No Absen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="0" width="100" height="20" uuid="93632dcb-c13a-4cec-8f10-643bf601c1b5"/>
+				<text><![CDATA[NIP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="193" y="0" width="100" height="20" uuid="5d00dd7f-15c0-4d72-b90e-5ed73d4f3c03"/>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="0" width="71" height="20" uuid="34daed90-aba5-4392-a169-73ee06e58870"/>
+				<text><![CDATA[Jam Masuk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="0" width="81" height="20" uuid="01653147-8ca3-4dbe-b301-3e17c075b073"/>
+				<text><![CDATA[Jam Keluar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="484" y="0" width="71" height="20" uuid="7f2d2a40-a911-4aca-b48c-d9f5af788371"/>
+				<text><![CDATA[Keterangan]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="33" height="20" uuid="e4d19e06-0ecc-4a67-a00e-aacdb9dddc65"/>
+				<textFieldExpression><![CDATA[$F{detail_absen_id_absen}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="0" width="100" height="20" uuid="980f2469-710b-4119-9bc1-757233e9293a"/>
+				<textFieldExpression><![CDATA[$F{id_pegawai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="193" y="0" width="100" height="20" uuid="580f1718-76ec-4972-9ef7-d73d47a11663"/>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="403" y="0" width="81" height="20" uuid="931bee96-8bc1-4ddd-81c0-58a9d91e6ef9"/>
+				<textFieldExpression><![CDATA[$F{detail_absen_jam_keluar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="0" width="68" height="20" uuid="2097bf4a-3465-4b87-b7d0-60fc5ba1439e"/>
+				<textFieldExpression><![CDATA[$F{detail_absen_keterangan}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="303" y="0" width="86" height="20" uuid="869a3a0d-1dc9-4d21-b612-b79d0609c2b3"/>
+				<textFieldExpression><![CDATA[$F{detail_absen_jam}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="23" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="0" width="218" height="20" uuid="1ea647ce-5799-4b71-873d-151b0d92968a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="0" width="80" height="20" uuid="1972acf4-6fa9-4138-b7b7-76ea688e886b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="512" y="0" width="40" height="20" uuid="286c3f4e-3b11-4389-92d9-fb6dcf96cb3b"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

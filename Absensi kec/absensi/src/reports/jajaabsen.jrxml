@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="45c024e6-c63c-4235-8c18-5fbcaaeb4c3d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="tanggal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tanggal2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT detail_absen.id_absen, detail_absen.id_pegawai, pegawai.nama,pegawai.jabatan,pegawai.id_jam_kerja, detail_absen.jam, detail_absen.jam_keluar, detail_absen.keterangan, TIMEDIFF(detail_absen.jam_keluar, detail_absen.jam) AS jam_kerja FROM detail_absen join head_absen on detail_absen.id_absen = head_absen.id_absen join pegawai on detail_absen.id_pegawai = pegawai.id_pegawai where keterangan = "hadir" and head_absen.tanggal between "$P!{tanggal}" and "$P!{tanggal2}"]]>
+	</queryString>
+	<field name="id_absen" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_pegawai" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jabatan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_jam_kerja" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jam" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jam_keluar" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="keterangan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jam_kerja" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="169" y="28" width="238" height="20" uuid="40f1d6ff-101c-4655-bcea-93c07e2f51d3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN JAM KERJA PEWAI PEGAWAI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="169" y="48" width="238" height="20" uuid="35b63c86-d83c-4132-be13-7fe6266aadfb"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KANTOR KECAMATAN TALEGONG]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="3" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="0" width="127" height="20" uuid="b2c2c7f4-d6c7-46cb-86f7-f9d232aeaa0c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NIP/NIK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="145" y="0" width="97" height="20" uuid="14c498d7-8797-415f-8dc2-cd04b584e823"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="0" width="71" height="20" uuid="3c66dabe-bec9-4a49-ac17-ce4f75cf26b3"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Jam Masuk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="447" y="0" width="57" height="20" uuid="c9206d2d-9d8d-4f49-81e4-dbc717e906a8"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Jam Keluar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="504" y="0" width="48" height="20" uuid="f2073118-7bf7-42fe-b2f4-4523f79830cf"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Jam Kerja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="312" y="0" width="64" height="20" uuid="19e8dad9-e6e0-4c94-8358-d7183ac136f0"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="242" y="0" width="70" height="20" uuid="32fb1da1-9031-400e-8ccb-13fbb1067440"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Jabatan]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="18" y="0" width="127" height="20" uuid="3bcb8ac3-32ca-4ee4-b8d9-564faede2cd4"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{id_pegawai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="145" y="0" width="97" height="20" uuid="1906d6d9-5aac-4b34-8393-147e34f43654"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="503" y="0" width="49" height="20" uuid="1bbaf2e1-dda4-4568-878f-9a35c741ce99"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{jam_kerja}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="376" y="0" width="71" height="20" uuid="ae12cb12-ae18-4d5d-8c10-cb042c3868c8"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{jam}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="446" y="0" width="57" height="20" uuid="fc3d49f4-eda6-4d4a-a4bc-d2907ac85c80"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{jam_keluar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="312" y="0" width="65" height="20" uuid="cdeea417-3233-4fd0-a7e3-25adf35b27cc"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{id_jam_kerja}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="243" y="-1" width="69" height="21" uuid="c419c6e9-20af-4a78-87f7-00f870ff58d1"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{jabatan}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="94" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="386" y="0" width="166" height="20" uuid="7754522e-6b5e-4e15-8039-eebe5d203a78"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="338" y="0" width="48" height="20" uuid="38d322ce-7f50-4426-9a4d-cb3451f816c1"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Talegong]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="338" y="74" width="123" height="20" uuid="16023a9c-e998-477d-b7a5-7765c98a32e1"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Caca Rifai, S.Pd.,M.Si]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="338" y="20" width="48" height="20" uuid="1362c1d2-6aa0-43e0-ac27-9911cfc00f5b"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Camat,]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

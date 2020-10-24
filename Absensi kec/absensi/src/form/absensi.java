@@ -1,0 +1,619 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package form;
+
+import controller.ManajemenUserAdmin;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import model.ModelLogin;
+import controller.KoneksiDB;
+import java.awt.event.KeyEvent;
+import java.sql.*;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+/**
+ *
+ * @author marsuc
+ */
+public class absensi extends javax.swing.JFrame {
+    
+    java.util.Date tglSekarang = new java.util.Date();
+    private SimpleDateFormat smpdtfmt = new SimpleDateFormat("dd MMMMMMMMM yyyy",Locale.getDefault());
+    private String tanggal = smpdtfmt.format(tglSekarang);
+    
+    KoneksiDB kn = new KoneksiDB();
+    
+    public Statement cn;
+    ResultSet rs;
+    public Connection conn;
+    
+    /**
+     * Creates new form absensi
+     */
+    public absensi() {
+        initComponents();
+        tgl.setText(tanggal);
+        setJam();
+        jTextField3.setText("Hadir");
+        jTextField3.setVisible(false);
+    }
+    
+    public final void setJam(){
+        ActionListener taskPerformer = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent evt){
+                String nol_jam = "",nol_menit="",nol_detik="";
+                
+                java.util.Date dateTime = new java.util.Date();
+                int nilai_jam = dateTime.getHours();
+                int nilai_menit = dateTime.getMinutes();
+                int nilai_detik = dateTime.getSeconds();
+                
+                if(nilai_jam <= 9) nol_jam="0";
+                if(nilai_menit <= 9) nol_menit="0";
+                if(nilai_detik <= 9) nol_detik="0";
+                
+                String jam = nol_jam + Integer.toString(nilai_jam);
+                String menit = nol_menit + Integer.toString(nilai_menit);
+                String detik = nol_detik + Integer.toString(nilai_detik);
+                
+                lblwktu.setText(jam+":"+menit+":"+detik+"");
+
+            }
+        };
+        new Timer(1000,taskPerformer).start();
+    }
+    
+    public Connection getKoneksi() {
+       // ini untuk koneksi yang combobox dari database
+        
+    //if (koneksi == null) {
+    try {
+    Class.forName("com.mysql.jdbc.Driver");
+    System.out.println("");
+    try {
+    String url = "jdbc:mysql://localhost:3306/dbabsensi?";
+    con = DriverManager.getConnection(url,"root","");
+    System.out.println("");
+    } catch (SQLException se) {
+    System.out.println("Koneksi Database Gagal error:" + se);
+    System.exit(0);
+    }
+    } catch (ClassNotFoundException cnfe) {
+    System.out.println("Class tidak ditemukan, error: " + cnfe);
+    System.exit(0);
+    }
+    //}
+    return con;
+    }
+    
+    
+    Connection con;
+    Statement st;
+    
+    public void filterhuruf(KeyEvent b){
+        if(Character.isAlphabetic(b.getKeyChar())){
+            b.consume();
+            JOptionPane.showMessageDialog(null, "Hanya di isi oleh angka");
+        }
+    }
+    
+    public void setkode()
+            
+            //untuk mengeset nama barang,satuan,harga dari kode barang yang di pilih dari combobox ke textfield
+            //nama barang,satuan,harga
+    {
+        try {
+        getKoneksi();
+        Statement stt = con.createStatement();
+        String sql = "select nama from pegawai where id_pegawai='"+jTextField1.getText()+"'"; 
+        ResultSet res = stt.executeQuery(sql);
+        
+        if(res.next()){
+            Object[] ob = new Object[4];
+            ob[0]=  res.getString(1);
+            
+            jTextField2.setText((String) ob[0]);
+            jTextField2.setEditable(false);
+        }
+        res.close(); stt.close();
+         
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            jTextField2.setEditable(true);
+        }              
+    }
+    
+    
+    public void koneksi(){
+            try{
+            Class.forName("com.mysql.jdbc.Driver");
+            conn=DriverManager.getConnection("jdbc:mysql://localhost/dbabsensi","root","");
+            cn=conn.createStatement();
+            } catch(ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "koneksi gagal....");
+            System.out.println(e.getMessage());
+            }
+    }
+    
+   
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tgl = new javax.swing.JLabel();
+        lblwktu = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jTextField2 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(0, 102, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setAutoscrolls(true);
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("NIP");
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Verivikasi Nama");
+
+        tgl.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        tgl.setForeground(new java.awt.Color(255, 255, 255));
+        tgl.setText("jLabel3");
+
+        lblwktu.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblwktu.setForeground(new java.awt.Color(255, 255, 255));
+        lblwktu.setText("jLabel4");
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/newicon/arrow-computer-icon-button-glossy-blue.png"))); // NOI18N
+        jButton1.setText("Masuk");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBackground(new java.awt.Color(0, 51, 153));
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("ABSENSI PEGAWAI");
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Lambang_Kecil.jpg"))); // NOI18N
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(25, 25, 25))
+        );
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Cara absensi :");
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Atau Masukan NIP Anda");
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("1. Dekatkan Baracode Pada Scanner");
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("2.Klik Enter Untuk Masuk.");
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/newicon/button_cancel.png"))); // NOI18N
+        jButton2.setText("Keluar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Absen Pulang");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("3. Klik Absen Pulang Jika Pulang.");
+
+        jButton4.setText("Clean");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(158, 158, 158)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel6))
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(tgl)
+                        .addGap(201, 201, 201)
+                        .addComponent(lblwktu)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel8))
+                                .addGap(102, 102, 102))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jButton4)))
+                                .addContainerGap()))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(75, 75, 75)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(63, 63, 63)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7))
+                        .addGap(36, 36, 36))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tgl)
+                            .addComponent(lblwktu))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 8, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel3)))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)))))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(93, 93, 93)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4)))
+                .addGap(55, 55, 55))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String nip = jTextField1.getText().toString();
+        String nama = jTextField2.getText().toString();
+        String keterangan = jTextField3.getText().toString();
+        String id_absen = null;
+        
+        try{
+            DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+            String tanggal2 = dateformat.format(date);
+            
+            koneksi();
+            String sql="select id_absen from head_absen where tanggal = '"+tanggal2+"'";
+            Statement stat = (Statement) conn.createStatement();
+            ResultSet res = stat.executeQuery(sql);
+            if(res.next()){
+                id_absen = res.getString(1);
+            }
+        }catch(SQLException e){
+            
+        }
+        
+        /*try{
+            String sql = "select id_pegawai,nama from pegawai where (id_pegawai = '"+nip+"' and nama = '"+nama+"')";
+            ResultSet rs = kn.showData(sql);
+            
+            if (rs.next()){
+                JOptionPane.showMessageDialog(null, "bisa lur!");
+            }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "can lur!");
+        }*/
+        
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        
+        try {
+            koneksi();
+            String sql="select id_pegawai,nama from pegawai where (id_pegawai = '"+nip+"' and nama = '"+nama+"')";
+            Statement stat = (Statement) conn.createStatement();
+            ResultSet res = stat.executeQuery(sql);
+            if (res.next()){
+                try{
+                    String insert = "insert into detail_absen(id_absen,id_pegawai,jam,keterangan) values('"+id_absen+"','"+nip+"','"+format.format(cal.getTime())+"','"+keterangan+"')";
+                    cn.executeUpdate(insert);
+                    conn.close();
+                    JOptionPane.showMessageDialog(null,"Data Berhasil Diinput");
+                }catch(SQLException e){
+                                System.out.println();
+
+                    JOptionPane.showMessageDialog(null,"Terjadi Kesalahan" +e);
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Terjadi Kesalahan" +e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+        setkode();
+        filterhuruf(evt);
+        if(jTextField1.getText().length()==18){
+            evt.consume();  
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        String nip = jTextField1.getText().toString();
+        String nama = jTextField2.getText().toString();
+        String id_absen = null;
+        
+        try{
+            DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+            String tanggal2 = dateformat.format(date);
+            
+            koneksi();
+            String sql="select id_absen from head_absen where tanggal = '"+tanggal2+"'";
+            Statement stat = (Statement) conn.createStatement();
+            ResultSet res = stat.executeQuery(sql);
+            if(res.next()){
+                id_absen = res.getString(1);
+            }
+        }catch(SQLException e){
+            
+        }
+        
+        /*try{
+            String sql = "select id_pegawai,nama from pegawai where (id_pegawai = '"+nip+"' and nama = '"+nama+"')";
+            ResultSet rs = kn.showData(sql);
+            
+            if (rs.next()){
+                JOptionPane.showMessageDialog(null, "bisa lur!");
+            }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "can lur!");
+        }*/
+        
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        
+        try {
+            koneksi();
+            String sql="select id_pegawai,nama from pegawai where (id_pegawai = '"+nip+"' and nama = '"+nama+"')";
+            Statement stat = (Statement) conn.createStatement();
+            ResultSet res = stat.executeQuery(sql);
+            if (res.next()){
+                try{
+                    String insert = "update detail_absen set jam_keluar = '"+format.format(cal.getTime())+"' where id_absen = '"+id_absen+"' and id_pegawai = '"+nip+"'";
+                    cn.executeUpdate(insert);
+                    conn.close();
+                    JOptionPane.showMessageDialog(null,"Data Berhasil Diinput");
+                }catch(SQLException e){
+                                System.out.println();
+
+                    JOptionPane.showMessageDialog(null,"Terjadi Kesalahan" +e);
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Terjadi Kesalahan" +e);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+         jTextField1.setText("");
+         jTextField2.setText("");
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(absensi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(absensi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(absensi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(absensi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new absensi().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel lblwktu;
+    private javax.swing.JLabel tgl;
+    // End of variables declaration//GEN-END:variables
+}
